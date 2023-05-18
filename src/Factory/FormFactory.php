@@ -86,9 +86,11 @@ final class FormFactory
     public function createFiltersForm(FilterCollection $filters, Request $request): FormInterface
     {
         $action = $request->query->get(EA::REFERRER, '');
-        if ($action !== '' && (strpos($action, '/admin/?crudAction') === false || strpos(
-                    $action,
-                    'CrudController'
+        if ($action !== '' && (
+                strpos(strtolower($action), '/admin/?crudaction') === false
+                || strpos(
+                    strtolower($action),
+                    'crudcontroller'
                 ) === false)) {
             die('you shall not pass!');
         }
