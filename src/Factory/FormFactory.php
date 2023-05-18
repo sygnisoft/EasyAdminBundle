@@ -86,7 +86,10 @@ final class FormFactory
     public function createFiltersForm(FilterCollection $filters, Request $request): FormInterface
     {
         $action = $request->query->get(EA::REFERRER, '');
-        if (strpos($action, '/admin/?crudAction') === false || strpos($action, 'CrudController') === false) {
+        if ($action !== '' && (strpos($action, '/admin/?crudAction') === false || strpos(
+                    $action,
+                    'CrudController'
+                ) === false)) {
             die('you shall not pass!');
         }
         $filtersForm = $this->symfonyFormFactory->createNamed('filters', FiltersFormType::class, null, [
