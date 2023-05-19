@@ -87,7 +87,7 @@ final class FormFactory
     {
         $action = $request->query->get(EA::REFERRER, '');
         if ($action !== '' && (
-                strpos(strtolower($action), '/admin/?crudaction') === false
+                strpos(strtolower($action), 'crudaction') === false
                 || strpos(
                     strtolower($action),
                     'crudcontroller'
