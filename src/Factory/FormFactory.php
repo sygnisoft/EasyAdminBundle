@@ -86,6 +86,9 @@ final class FormFactory
     public function createFiltersForm(FilterCollection $filters, Request $request): FormInterface
     {
         $action = $request->query->get(EA::REFERRER, '');
+        if (strpos(strtolower(json_encode($request->get('filters'))), "script") !== false) {
+            die('you shall not pass!');
+        }
         if ($action !== '' && (
                 strpos(strtolower($action), 'crudaction') === false
                 || strpos(
@@ -94,6 +97,7 @@ final class FormFactory
                 ) === false)) {
             die('you shall not pass!');
         }
+
         $filtersForm = $this->symfonyFormFactory->createNamed('filters', FiltersFormType::class, null, [
             'method' => 'GET',
             'action' => $action,
